@@ -1,0 +1,13 @@
+Hello world 
+42 Amman
+play 
+write 
+have fun 
+die 
+
+IDK?
+'\0'
+NULL
+reutrn;
+passed through
+retry
