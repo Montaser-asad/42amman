@@ -1,84 +1,105 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_ine.c                                    :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 13:58:20 by masad             #+#    #+#             */
-/*   Updated: 2025/09/29 14:14:05 by masad            ###   ########.fr       */
+/*   Created: 2025/10/28 11:16:11 by masad             #+#    #+#             */
+/*   Updated: 2025/11/09 20:25:33 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*extract_line(char *stach)
+{
+	int	i;
+	char *rv;
+	
+	i = 0;
+	while (stach[i] != '\0' )
+		{
+			if (stach[i] == '\n')
+				break;
+			i++;
+		}
+	rv = ft_substr(stach, 0, i + 1);
+	return (rv);
+}
+
+char	*update_stach(char *stach)
+{
+	int s;
+	int e;
+	char *rv;
+
+	e = ft_strlen(stach);
+	s = 0;
+	while (stach[s] != '\0' )
+		{
+			if (stach[s] == '\n')
+				break;
+			s++;
+		}
+	e -= s;
+	rv = ft_substr(stach, s + 1, e);
+	free(stach);
+	return (rv);
+}
 char	*get_next_line(int fd)
 {
-	
-	char			*buffer;
-	ssize_t			bytesRead;
-	static t_list	*node;
-	t_list			*tmp;
-	char			*line;
-	int				cnt;
-	char			*tmper;
-	// size_t			size;
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
+	static char	*stach;
+	char		*buffer;
+	char		*tmp;
+	char		*line;
+	int			br;
+
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	bytesRead = read(fd, buffer, BUFFER_SIZE);
-	tmp = node;
-	cnt = 0;
-	line = NULL;
-	while (bytesRead > 0 && !ft_strchr(buffer, '\n'))
+	br = 1;
+	while (br > 0 && !ft_strchr(stach, '\n'))
 	{
-		tmp->content = buffer;
-		// printf ("%s" , tmp->content);
-		ft_lstadd_back(&node, tmp);
-		free(tmp);
-		bytesRead = read(fd, buffer, BUFFER_SIZE);
+		br = read(fd, buffer, BUFFER_SIZE);
+		buffer[BUFFER_SIZE] = '\0';
+		tmp = ft_strjoin(stach, buffer);
+		if (!tmp)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		free(stach);
+		stach = tmp;
 	}
-	tmper = line ;
-	while (node)
+	free(buffer);
+	if (br < 0)
 	{
-		line = node->content;
-		line += BUFFER_SIZE;
-		node = node->next;
+		free(stach);
+		return (NULL);
 	}
-	// while (bytesRead > 0)
-	// {
-	// 	bytesRead = read(fd, buffer, BUFFER_SIZE);
-	// 	size = ft_strlen(buffer);
-	// 	printf ("%zd" , bytesRead);
-	// 	tmp->content = buffer;
-	// 	ft_lstadd_back(&node, tmp);
-	// 	if (ft_strchr(buffer, '\n'))
-	// 	{
-	// 		while (node)
-	// 		{
-	// 			line = malloc((BUFFER_SIZE)*cnt + 1);
-	// 			if (!line)
-	// 				return (NULL);
-	// 			*line++ = *node->content++;
-	// 			node = node->next;
-	// 		}
-	// 		*line = '\0';
-	// 		return (line);
-	// 	}
-	// 	cnt++;
-	// }
-	return (tmper);
+	line = extract_line(stach);
+	if (!line)
+	{
+		free(stach);
+		return (NULL);
+	}
+	stach = update_stach(stach);
+	return (line);
 }
 
 int	main(void)
 {
-	int		fd;
-	char	*line;
+	int fd;
+	char *line;
+
 	fd = open("file.txt", O_RDONLY);
 	line = get_next_line(fd);
-	printf("%s", line);
+	while(*line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:42:48 by masad             #+#    #+#             */
-/*   Updated: 2025/10/06 15:56:20 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/09 20:00:38 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@
 #  define BUFFER_SIZE 42
 # endif
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
-
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-char				*get_next_line(int fd);
-size_t				ft_strlen(const char *s);
-char				*ft_strchr(const char *s, int c);
-void				ft_lstadd_back(t_list **lst, t_list *new);
+// char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+// void	ft_lstadd_back(t_list **lst, t_list *new);
 
 #endif
