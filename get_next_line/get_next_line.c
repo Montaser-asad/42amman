@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 11:16:11 by masad             #+#    #+#             */
-/*   Updated: 2025/11/13 19:32:13 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/16 16:59:14 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*update_stach(char *stach)
 	int		s;
 	int		e;
 	char	*df;
-	char	*tmp;
 
 	e = ft_strlen(stach);
 	s = 0;
@@ -49,23 +48,21 @@ char	*update_stach(char *stach)
 	return (df);
 }
 
-int	sf(void *fp)
-{
-	free(fp);
-	return (1);
-}
-
-char	*handel_stach(char *stach, int br, char *tmp)
+char	*handel_stach(char *stach, int br)
 {
 	char	*line;
 
 	if (br < 0)
-		if (sf(stach))
-			return (NULL);
+	{
+		free(stach);
+		return (NULL);
+	}
 	line = extract_line(stach);
 	if (!line)
-		if (sf(stach))
-			return (NULL);
+	{
+		free(stach);
+		return (NULL);
+	}
 	return (line);
 }
 
@@ -93,8 +90,10 @@ char	*get_next_line(int fd)
 		buffer[br] = '\0';
 		tmp = ft_strjoin(stach, buffer);
 		if (!tmp)
-			if (sf(buffer))
-				return (NULL);
+		{
+			free(buffer);
+			return (NULL);
+		}
 		free(stach);
 		stach = tmp;
 	}
@@ -104,7 +103,7 @@ char	*get_next_line(int fd)
 		free(stach);
 		return (NULL);
 	}
-	line = handel_stach(stach, br, tmp);
+	line = handel_stach(stach, br);
 	if (!line)
 	{
 		free(stach);
@@ -114,26 +113,26 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
 
-	fd = open("file.txt", O_RDONLY);
-	if (fd < 0)
-		return (1);
-	line = get_next_line(fd);
-	while (line)
-	{
-		/* if empty string returned, free and stop (EOF) */
-		if (*line == '\0')
-		{
-			free(line);
-			break ;
-		}
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (0);
-}
+// 	fd = open("file.txt", O_RDONLY);
+// 	if (fd < 0)
+// 		return (1);
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		/* if empty string returned, free and stop (EOF) */
+// 		if (*line == '\0')
+// 		{
+// 			free(line);
+// 			break ;
+// 		}
+// 		printf("%s", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	return (0);
+// }

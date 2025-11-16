@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:44:07 by masad             #+#    #+#             */
-/*   Updated: 2025/11/13 19:25:21 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/16 16:56:54 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	if (s1 && !s2)
 		return (ft_strdup(s1));
-	s1_len = ft_strlen(s1);size_t	i;
+	s1_len = ft_strlen(s1);
 
 	s2_len = ft_strlen(s2);
 	str = malloc(s1_len + s2_len + 1);
@@ -100,8 +100,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 
-char	*
-ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	if (s == NULL)
 		return (NULL);
