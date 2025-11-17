@@ -5,12 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/28 11:16:11 by masad             #+#    #+#             */
-/*   Updated: 2025/11/16 16:59:14 by masad            ###   ########.fr       */
+/*   Created: 2025/11/17 20:55:35 by masad             #+#    #+#             */
+/*   Updated: 2025/11/17 20:55:38 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*free_and_null(char **ptr)
+{
+	if (*ptr)
+		free(*ptr);
+	*ptr = NULL;
+	return (NULL);
+}
 
 char	*extract_line(char *stach)
 {
@@ -18,13 +26,9 @@ char	*extract_line(char *stach)
 	char	*rv;
 
 	i = 0;
-	while (stach[i] != '\0')
-	{
-		if (stach[i] == '\n')
-			break ;
+	while (stach[i] && stach[i] != '\n')
 		i++;
-	}
-	rv = ft_substr(stach, 0, i + 1);
+	rv = ft_substr(stach, 0, i + (stach[i] == '\n'));
 	return (rv);
 }
 
@@ -34,45 +38,21 @@ char	*update_stach(char *stach)
 	int		e;
 	char	*df;
 
-	e = ft_strlen(stach);
 	s = 0;
-	while (stach[s] != '\0')
-	{
-		if (stach[s] == '\n')
-			break ;
+	while (stach[s] && stach[s] != '\n')
 		s++;
-	}
-	e -= s;
+	if (!stach[s])
+		return (free_and_null(&stach));
+	e = ft_strlen(stach) - s;
 	df = ft_substr(stach, s + 1, e);
 	free(stach);
 	return (df);
 }
 
-char	*handel_stach(char *stach, int br)
+char	*read_and_stach(int fd, char *stach)
 {
-	char	*line;
-
-	if (br < 0)
-	{
-		free(stach);
-		return (NULL);
-	}
-	line = extract_line(stach);
-	if (!line)
-	{
-		free(stach);
-		return (NULL);
-	}
-	return (line);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	*stach;
-	char		*buffer;
-	char		*tmp;
-	char		*line;
-	int			br;
+	char	*buffer;
+	int		br;
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
@@ -84,55 +64,35 @@ char	*get_next_line(int fd)
 		if (br < 0)
 		{
 			free(buffer);
-			free(stach);
-			return (NULL);
+			return (free_and_null(&stach));
 		}
 		buffer[br] = '\0';
-		tmp = ft_strjoin(stach, buffer);
-		if (!tmp)
+		stach = ft_strjoin(stach, buffer);
+		if (!stach)
 		{
 			free(buffer);
 			return (NULL);
 		}
-		free(stach);
-		stach = tmp;
 	}
 	free(buffer);
-	if (br == 0 && (!stach || stach[0] == '\0'))
-	{
-		free(stach);
-		return (NULL);
-	}
-	line = handel_stach(stach, br);
-	if (!line)
-	{
-		free(stach);
-		return (NULL);
-	}
-	stach = update_stach(stach);
-	return (line);
+	return (stach);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
+char	*get_next_line(int fd)
+{
+	static char	*stach;
+	char		*line;
 
-// 	fd = open("file.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		/* if empty string returned, free and stop (EOF) */
-// 		if (*line == '\0')
-// 		{
-// 			free(line);
-// 			break ;
-// 		}
-// 		printf("%s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	return (0);
-// }
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stach = read_and_stach(fd, stach);
+	if (!stach || !*stach)
+		return (free_and_null(&stach));
+	line = extract_line(stach);
+	if (!line)
+		return (free_and_null(&stach));
+	stach = update_stach(stach);
+	if (stach && *stach == '\0')
+		free_and_null(&stach);
+	return (line);
+}
