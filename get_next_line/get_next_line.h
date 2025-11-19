@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:42:48 by masad             #+#    #+#             */
-/*   Updated: 2025/11/19 19:09:05 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/19 19:41:36 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 
