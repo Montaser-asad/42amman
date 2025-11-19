@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:42:48 by masad             #+#    #+#             */
-/*   Updated: 2025/11/17 20:54:21 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/19 19:08:55 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
@@ -17,9 +16,9 @@
 #  define BUFFER_SIZE 42
 # endif
 # define MAX_FD 10240
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

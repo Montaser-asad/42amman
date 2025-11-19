@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 20:55:35 by masad             #+#    #+#             */
-/*   Updated: 2025/11/17 20:55:38 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/19 19:07:47 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,12 @@ char	*read_and_stach(int fd, char *stach)
 	{
 		br = read(fd, buffer, BUFFER_SIZE);
 		if (br < 0)
-		{
-			free(buffer);
-			return (free_and_null(&stach));
-		}
+			if (!free_and_null(&buffer))
+				return (free_and_null(&stach));
 		buffer[br] = '\0';
 		stach = ft_strjoin(stach, buffer);
 		if (!stach)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (free_and_null(&buffer));
 	}
 	free(buffer);
 	return (stach);

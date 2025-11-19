@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 20:55:35 by masad             #+#    #+#             */
-/*   Updated: 2025/11/17 20:55:38 by masad            ###   ########.fr       */
+/*   Updated: 2025/11/19 19:07:48 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ char	*read_and_stach(int fd, char *stach)
 	{
 		br = read(fd, buffer, BUFFER_SIZE);
 		if (br < 0)
-			if(!free(buffer))
-			    return (free_and_null(&stach));
+			if (!free_and_null(&buffer))
+				return (free_and_null(&stach));
 		buffer[br] = '\0';
 		stach = ft_strjoin(stach, buffer);
 		if (!stach)
-			return(free_and_null(buffer));	    
+			return (free_and_null(&buffer));
 	}
 	free(buffer);
 	return (stach);
@@ -78,9 +78,8 @@ char	*get_next_line(int fd)
 	static char	*stach[MAX_FD];
 	char		*line;
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		    if(!free(buffer))
-		         return (free_and_null(stach[fd]));
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stach[fd] = read_and_stach(fd, stach[fd]);
 	if (!stach[fd] || !*stach[fd])
 		return (free_and_null(&stach[fd]));
