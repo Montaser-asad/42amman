@@ -2,9 +2,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
+LIB = libft.a
+
 NAME = push_swap
 
-CFILES = push_swap.c
+CFILES = push_swap.c ops.c
 
 
 OFILES = $(CFILES:.c=.o)
@@ -13,7 +15,7 @@ OFILES = $(CFILES:.c=.o)
 all : $(NAME)
 
 $(NAME): $(OFILES)
-	@$(CC) $(CFILES) -o $(NAME)
+	@$(CC) $(CFILES) -o $(NAME) $(LIB)
 
 clean:
 	@rm -f $(OFILES)

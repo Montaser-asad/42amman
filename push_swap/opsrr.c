@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   opsrr.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 16:26:07 by masad             #+#    #+#             */
-/*   Updated: 2025/12/07 20:18:16 by masad            ###   ########.fr       */
+/*   Created: 2025/12/28 18:25:36 by masad             #+#    #+#             */
+/*   Updated: 2025/12/28 18:27:27 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	rra(t_list *a)
 {
-	t_list	*elm;
-
-	elm = (malloc(sizeof(t_list)));
-	if (!elm)
-		return (NULL);
-	elm->content = content;
-	elm->next = (NULL);
-	return (elm);
+}
+void	rrb(t_list *b)
+{
+}
+void	rrr(t_list *a, t_list *b)
+{
 }

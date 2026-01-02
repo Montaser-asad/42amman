@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   opsp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 16:26:07 by masad             #+#    #+#             */
-/*   Updated: 2025/12/07 20:18:16 by masad            ###   ########.fr       */
+/*   Created: 2025/12/28 18:25:30 by masad             #+#    #+#             */
+/*   Updated: 2025/12/28 20:29:00 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+void	pa(t_list **a, t_list **b)
 {
-	t_list	*elm;
+}
+void	pb(t_list **b, t_list **a)
+{
+	push(*b, 50);
+}
+int	pop(t_list **node)
+{
+	t_list	*t;
+	int		r;
 
-	elm = (malloc(sizeof(t_list)));
-	if (!elm)
-		return (NULL);
-	elm->content = content;
-	elm->next = (NULL);
-	return (elm);
+	t = *node;
+	(*node) = (*node)->next;
+	r = t->content;
+	free(t);
+	t = NULL;
+	return (r);
+}
+
+void	push(t_list **node, int n)
+{
+	t_list *t;
+
+	t = ft_lstnew(n);
+	t->next = *node;
+	*node = t;
 }

@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: masad <masad@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 16:26:07 by masad             #+#    #+#             */
-/*   Updated: 2025/12/07 20:18:16 by masad            ###   ########.fr       */
+/*   Created: 2025/09/20 16:17:42 by masad             #+#    #+#             */
+/*   Updated: 2025/09/22 15:36:00 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_putnbr(long nb, int *cnt)
 {
-	t_list	*elm;
+	char	x;
 
-	elm = (malloc(sizeof(t_list)));
-	if (!elm)
-		return (NULL);
-	elm->content = content;
-	elm->next = (NULL);
-	return (elm);
+	(*cnt)++;
+	if (nb < 0)
+	{
+		(*cnt)++;
+		nb = -nb;
+		write(1, "-", 1);
+	}
+	if (nb >= 10)
+		ft_putnbr(nb / 10, cnt);
+	x = (nb % 10) + '0';
+	write(1, &x, 1);
 }
