@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   opsrr.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/28 18:25:36 by masad             #+#    #+#             */
-/*   Updated: 2025/12/28 18:27:27 by masad            ###   ########.fr       */
+/*   Created: 2025/08/09 17:31:44 by masad             #+#    #+#             */
+/*   Updated: 2025/09/10 19:51:30 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	rra(t_list *a)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-}
-void	rrb(t_list *b)
-{
-}
-void	rrr(t_list *a, t_list *b)
-{
+	unsigned char		*d;
+	unsigned const char	*s;
+
+	d = dest;
+	s = src;
+	while (n--)
+	{
+		*d = *s;
+		d++;
+		s++;
+	}
+	return (dest);
 }

@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 13:34:22 by masad             #+#    #+#             */
-/*   Updated: 2026/01/02 19:16:37 by masad            ###   ########.fr       */
+/*   Created: 2025/08/13 22:09:10 by masad             #+#    #+#             */
+/*   Updated: 2025/09/03 14:01:44 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdint.h>
-# include <stdlib.h>
-# include <unistd.h>
-long		ft_atol(const char *nptr);
-int			ft_isdigit(int c);
-static int	count(char const *str, char c);
-char		*ft_strchr(const char *s, int c);
-
-#endif
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		c += 32;
+	return (c);
+}

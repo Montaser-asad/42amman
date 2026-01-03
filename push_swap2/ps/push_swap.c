@@ -6,53 +6,75 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:24 by masad             #+#    #+#             */
-/*   Updated: 2026/01/02 19:02:54 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/03 20:14:11 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-void	sort(t_list **a, t_list **b)
+// void	sort(t_list **a, t_list **b)
+// {
+// 	if ((*a)->content > (*b)->content)
+// 		pb(b, a);
+// 	else if ((*a)->content < (*b)->content)
+// 	{
+// 		pb(b, a);
+// 		ra(a);
+// 		pa(a, b);
+// 		pa(a, b);
+// 		sa(a);
+// 		rrb(b);
+// 	}
+// }
+
+// void	input2(void)
+// {
+// }
+
+// void	input3(void)
+// {
+// }
+
+// void	input4(void)
+// {
+// }
+
+// void	input5(void)
+// {
+// }
+
+void	push_swap(char const *input[])
 {
-	if ((*a)->content > (*b)->content)
-		pb(b, a);
-	else if ((*a)->content < (*b)->content)
-	{
-		pb(b, a);
-		ra(a);
-		pa(a, b);
-		pa(a, b);
-		sa(a);
-		rrb(b);
-	}
-}
+	int		i;
+	t_list	*a;
+	t_list	*b;
+	t_list	*t;
 
-void	input2(void)
-{
-}
-
-void	input3(void)
-{
-}
-
-void	input4(void)
-{
-}
-
-void	input5(void)
-{
-}
-
-void	push_swap(int n)
-{
-	t_list		*a;
-	t_list		*b;
-	t_list		*t;
-
-	a = NULL;
+	i = 0;
 	b = NULL;
-	t = ft_lstnew(n);
-	ft_lstadd_back(&a, t);
+	a = NULL;
+	while (input[i])
+	{
+		t = ft_lstnew(ft_atol(input[i]));
+		ft_lstadd_back(&a, t);
+		i++;
+	}
+	pb(&b, &a);
+	pb(&b, &a);
+	ss(&a, &b);
+	printf("\nthis is a\n");
+	while (a)
+	{
+		printf("%d\n", a->content);
+		a = a->next;
+	}
+	printf("\nthis is b\n");
+	while (b)
+	{
+		printf("%d\n", b->content);
+		b = b->next;
+	}
 }
 
 int	main(int argc, char const *argv[])
@@ -70,10 +92,6 @@ int	main(int argc, char const *argv[])
 	if (!check_dup(argv + 1))
 		return (-1);
 	i = 1;
-	while (argv[i])
-	{
-		push_swap(ft_atoi(argv[i]));
-		i++;
-	}
+	push_swap(argv + 1);
 	return (0);
 }
