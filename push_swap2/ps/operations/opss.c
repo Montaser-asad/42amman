@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:29 by masad             #+#    #+#             */
-/*   Updated: 2026/01/03 20:13:28 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/04 19:42:45 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ static void	doit(t_list **a, t_list **b)
 }
 void	sa(t_list **a)
 {
+	if (!a || !*a || !(*a)->next)
+		return ;
 	doit(a, NULL);
 	write(1, "sa\n", 3);
 }
 void	sb(t_list **b)
 {
+	if (!b || !*b || !(*b)->next)
+		return ;
 	doit(NULL, b);
 	write(1, "sb\n", 3);
 }
