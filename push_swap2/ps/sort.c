@@ -6,78 +6,131 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:22:01 by masad             #+#    #+#             */
-/*   Updated: 2026/01/04 21:26:06 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/06 20:04:28 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort3(t_list **a)
+int	find_min(t_list *a)
 {
-	if (((*a)->next)->content < (*a)->content) //(max > mid > min)
-		if (((*a)->next)->content > ft_lstlast(a))
-		{
-			ra(a);
-			sa(a);
-		}
-	if (ft_lstlast(a) > (*a)->content) //(min > max > mid)
-		if (ft_lstlast(a) < ((*a)->next)->content)
-		{
-			rra(a);
-			sa(a);
-		}
-	if (ft_lstlast(a) < (*a)->content) //(max > min > mid)
-		if (ft_lstlast(a) > ((*a)->next)->content)
-		{
-			ra(a);
-			sa(a);
-		}
-	if ((*a)->content > ft_lstlast(a)) //(mid > max > min)
-		if ((*a)->content < ((*a)->next)->content)
-			rra(a);
-	if ((*a)->content < ft_lstlast(a)) //(mid > min > max)
-		if ((*a)->content > ((*a)->next)->content)
-			ra(a);
-}
-void	sort5(t_list **a, t_list **b)
-{
-	if ((*a)->content > (*b)->content)
-		pb(b, a);
-	else if ((*a)->content < (*b)->content)
+	int	min;
+	int	idx;
+	int	i;
+
+	min = a->content;
+	idx = 1;
+	i = 1;
+	while (a)
 	{
-		pb(b, a);
-		ra(a);
-		pa(a, b);
-		pa(a, b);
-		sa(a);
-		rrb(b);
+		if (a->content < min)
+		{
+			min = a->content;
+			idx = i;
+		}
+		a = a->next;
+		i++;
 	}
+	return (idx);
 }
 void	put_min_top(t_list **a)
 {
-	t_list	*t;
+	int	size;
+	int	p;
 
-	t = *a;
+	size = ft_lstsize((*a));
+	p = find_min(*a);
+	if (p == 1)
+		return ;
+	else if (p == 2)
+		sa(a);
+	else if (p == 3)
+	{
+		ra(a);
+		ra(a);
+	}
+	else if (p == 4 && size == 4)
+		rra(a);
+	else if (p == 4 && size == 5)
+	{
+		rra(a);
+		rra(a);
+	}
+	else if (p == 5 && size == 5)
+		rra(a);
+}
+void	sort3(t_list **a)
+{
+	int	f;
+	int	b;
+	int	l;
+
+	f = (*a)->content;
+	b = (*a)->next->content;
+	l = ft_lstlast(*a)->content;
+	if (f > b && b < l && f < l)
+		sa(a);
+	else if (f > b && b > l)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if (f > b && b < l && f > l)
+		ra(a);
+	else if (f < b && b > l && f < l)
+	{
+		sa(a);
+		ra(a);
+	}
+	else if (f < b && b > l && f > l)
+		rra(a);
+}
+void	sort5_4(t_list **a, t_list **b)
+{
+	if (ft_lstsize(*a) == 4)
+	{
+		put_min_top(a);
+		pb(b, a);
+		sort3(a);
+		pa(a, b);
+	}
+	else if (ft_lstsize(*a) == 5)
+	{
+		put_min_top(a);
+		pb(b, a);
+		put_min_top(a);
+		pb(b, a);
+		sort3(a);
+		sb(b);
+		pa(a, b);
+		pa(a, b);
+	}
 }
 
 void	short_sort(t_list **a, t_list **b)
 {
-	t_list	*t;
+	int	size;
 
-	t = NULL;
-	if (ft_lstsize(*a) == 1)
+	size = ft_lstsize(*a);
+	if (size == 1)
 		return ;
-	else if (ft_lstsize(*a) == 2)
-	{
+	if (size == 2)
 		if ((*a)->content > ((*a)->next)->content)
 			sa(a);
-	}
-	else if (ft_lstsize(*a) == 3)
+	if (size == 3)
 		sort3(a);
-	else if (ft_lstsize(*a) == 4)
-		sort4(a, b);
-	else if (ft_lstsize(*a) == 5)
-		sort5(a, b);
-	else
-		sort(a, b);
+	if (size == 4 || size == 5)
+	{
+		if (size == 5)
+		{
+			put_min_top(a);
+			pb(b, a);
+		}
+		put_min_top(a);
+		pb(b, a);
+		sort3(a);
+		pa(a, b);
+		if (size == 5)
+			pa(a, b);
+	}
 }

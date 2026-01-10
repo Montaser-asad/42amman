@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:34:22 by masad             #+#    #+#             */
-/*   Updated: 2026/01/03 19:04:44 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/08 19:01:18 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 typedef struct s_list
 {
+	// int				value;
+	// int				position;
+	// int				pprice;
 	int				content;
 	struct s_list	*next;
 }					t_list;

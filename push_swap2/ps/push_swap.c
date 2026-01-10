@@ -6,12 +6,14 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:24 by masad             #+#    #+#             */
-/*   Updated: 2026/01/04 20:21:42 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/08 19:00:49 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+
+
 
 
 void	push_swap(char const *input[])
@@ -31,26 +33,27 @@ void	push_swap(char const *input[])
 		i++;
 	}
 	if (ft_lstsize(a) < 6)
-		short_sort(&a , &b);
-	else 
-		sort (&a , &b);
+		short_sort(&a, &b);
+	// else
+	// 	sort(&a, &b);
+	while (a)
+	{
+		printf("%d ", a->content);
+		a = a->next;
+	}
 }
 
 int	main(int argc, char const *argv[])
 {
-	int	i;
-
-	i = 1;
-	while (argc > 1 && argv[i])
-	{
-		if (!check_in(argv[i]) || !check_max(argv[i]))
-			return (-1);
-		else
-			i++;
-	}
-	if (!check_dup(argv + 1))
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (-1);
-	i = 1;
-	push_swap(argv + 1);
-	return (0);
+	else if (argv++ && argc == 2)
+		argv = (char const **)(ft_split(argv[0], ' '));
+	if (!parse(argv))
+	{
+		if (parse(argv) == 2)
+			return (0);
+		push_swap(argv);
+	}
+	return (1);
 }
