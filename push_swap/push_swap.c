@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:24 by masad             #+#    #+#             */
-/*   Updated: 2026/01/15 20:25:22 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/17 16:11:25 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int	main(int argc, char const *argv[])
 		split = ft_split(argv[0], ' ');
 		argv = (char const **)split;
 	}
+
 	return (handle_input(argv, split));
 }
