@@ -6,13 +6,13 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:41:36 by masad             #+#    #+#             */
-/*   Updated: 2025/09/11 10:47:21 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/03 18:47:59 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(int))
 {
 	if (!lst || !f)
 		return ;

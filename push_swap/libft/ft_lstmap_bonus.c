@@ -6,13 +6,13 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:47:36 by masad             #+#    #+#             */
-/*   Updated: 2025/09/10 20:17:56 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/03 18:55:24 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, int (*f)(int), void (*del)(int))
 {
 	t_list	*new;
 	t_list	*tmp;

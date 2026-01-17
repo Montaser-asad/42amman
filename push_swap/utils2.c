@@ -1,38 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 18:26:03 by masad             #+#    #+#             */
-/*   Updated: 2025/08/19 18:39:00 by masad            ###   ########.fr       */
+/*   Created: 2026/01/15 20:29:58 by masad             #+#    #+#             */
+/*   Updated: 2026/01/15 20:31:03 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+void	free_split(char **split)
 {
 	int	i;
-	int	sign;
-	int	result;
 
-	result = 0;
-	sign = 1;
 	i = 0;
-	while (nptr[i] == ' ' || ((nptr[i] >= 9 && nptr[i] <= 13) && nptr[i]))
-		i++;
-	if (nptr[i] == '-' || (nptr[i] == '+' && nptr[i]))
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
+int	handle_input(char const **argv, char **split)
+{
+	if (!parse(argv) || parse(argv) == 2)
 	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
+		if (parse(argv) == 2)
+		{
+			if (split)
+				free_split(split);
+			return (0);
+		}
+		push_swap(argv);
 	}
-	while ((nptr[i] >= '0' && nptr[i] <= '9') && nptr[i])
+	else
 	{
-		result = result * 10 + nptr[i] - '0';
-		i++;
+		if (split)
+			free_split(split);
+		write(2, "Error\n", 6);
+		return (1);
 	}
-	return (result * sign);
+	if (split)
+		free_split(split);
+	return (0);
 }

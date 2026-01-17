@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/06 20:05:01 by masad             #+#    #+#             */
-/*   Updated: 2026/01/06 20:37:32 by masad            ###   ########.fr       */
+/*   Created: 2026/01/14 21:03:57 by masad             #+#    #+#             */
+/*   Updated: 2026/01/15 17:02:14 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_dup(const char **n)
 		j = i + 1;
 		while (n[j])
 		{
-			if (ft_atol(n[i]) > ft_atol(n[j]))
+			if (ft_atol(n[i]) == ft_atol(n[j]))
 				return (0);
 			j++;
 		}
@@ -42,20 +42,19 @@ int	check_dup(const char **n)
 	}
 	return (1);
 }
+
 int	check_sort(const char **n)
 {
 	int	i;
-	int	r;
 
-	r = 0;
 	i = 0;
 	while (n[i] && n[i + 1])
 	{
-		if (n[i] > n[i + 1])
-			r = 1;
+		if (ft_atol(n[i]) > ft_atol(n[i + 1]))
+			return (1);
 		i++;
 	}
-	return (r);
+	return (0);
 }
 
 int	check_in(const char *n)
@@ -74,7 +73,7 @@ int	check_in(const char *n)
 
 int	parse(const char **input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (input[i])

@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   opsp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/04 17:43:19 by masad             #+#    #+#             */
-/*   Updated: 2025/08/13 13:57:46 by masad            ###   ########.fr       */
+/*   Created: 2025/12/28 18:25:30 by masad             #+#    #+#             */
+/*   Updated: 2026/01/15 16:56:50 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-int	ft_isascii(int c)
+void	pa(t_list **a, t_list **b)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
-		return (0);
+	t_list	*t;
+
+	if (!b || !*b)
+		return ;
+	t = *b;
+	*b = (*b)->next;
+	t->next = NULL;
+	ft_lstadd_front(a, t);
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_list **b, t_list **a)
+{
+	t_list	*t;
+
+	if (!a || !*a)
+		return ;
+	t = *a;
+	*a = (*a)->next;
+	t->next = NULL;
+	ft_lstadd_front(b, t);
+	write(1, "pb\n", 3);
 }

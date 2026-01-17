@@ -6,13 +6,13 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:17:26 by masad             #+#    #+#             */
-/*   Updated: 2025/09/11 10:47:01 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/03 18:47:40 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(int))
 {
 	if (!lst || !del)
 		return ;

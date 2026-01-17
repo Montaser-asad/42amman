@@ -6,13 +6,13 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 09:26:19 by masad             #+#    #+#             */
-/*   Updated: 2025/09/11 10:47:15 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/03 18:47:48 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(int))
 {
 	t_list	*tmp;
 

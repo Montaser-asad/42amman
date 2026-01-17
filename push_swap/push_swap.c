@@ -6,99 +6,109 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:24 by masad             #+#    #+#             */
-/*   Updated: 2025/12/30 18:36:03 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/15 20:25:22 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_dup(const char **n)
+void	bubsort(int *array, int size)
 {
 	int	i;
 	int	j;
+	int	t;
+
+	j = 0;
+	while (j < size - 1)
+	{
+		i = 0;
+		while (i < size - 1 - j)
+		{
+			if (array[i] > array[i + 1])
+			{
+				t = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = t;
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
+static void	give_index(t_list **node, int *array, int sizeofls)
+{
+	int		i;
+	t_list	*t;
+
+	t = *node;
+	while (*node)
+	{
+		i = -1;
+		while (++i < sizeofls)
+			if ((*node)->content == array[i])
+				(*node)->index = i;
+		(*node) = (*node)->next;
+	}
+	free(array);
+	(*node) = t;
+}
+
+void	sort_i(t_list **node)
+{
+	t_list	*t;
+	int		*array;
+	int		i;
+	int		sizeofls;
+
+	t = *node;
+	i = -1;
+	sizeofls = ft_lstsize(*node);
+	array = malloc(sizeof(int) * sizeofls);
+	while (++i < sizeofls)
+	{
+		array[i] = (*node)->content;
+		*node = (*node)->next;
+	}
+	(*node) = t;
+	bubsort(array, sizeofls);
+	give_index(node, array, sizeofls);
+}
+
+void	push_swap(char const *input[])
+{
+	int		i;
+	t_list	*a;
+	t_list	*b;
+	t_list	*t;
 
 	i = 0;
-	while (n[i])
+	b = NULL;
+	a = NULL;
+	while (input[i])
 	{
-		j = i + 1;
-		while (n[j])
-		{
-			if (ft_atoi(n[i]) == ft_atoi(n[j]))
-				return (0);
-			j++;
-		}
+		t = ft_lstnew(ft_atol(input[i]));
+		ft_lstadd_back(&a, t);
 		i++;
 	}
-	return (1);
-}
-
-int	check_in(const char *n)
-{
-	if (*n == '-' || *n == '+')
-		n++;
-	while (*n)
-	{
-		if (*n >= '0' && *n <= '9')
-			n++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void	sort(t_list **a, t_list **b)
-{
-	if ((*a)->content > (*b)->content)
-		pb(b, a);
-	else if ((*a)->content < (*b)->content)
-	{
-		pb(b, a);
-		ra(a);
-		pa(a, b);
-		pa(a, b);
-		sa(a);
-		rrb(b);
-	}
-}
-
-void	push_swap(const char *n)
-{
-	const char	*check;
-	t_list		*a;
-	t_list		*b;
-	t_list		*t;
-
-	check = n;
-	a = NULL;
-	b = NULL;
-	t = ft_lstnew(ft_strdup(n));
-	ft_lstadd_back(&a, t);
-	while (a)
-	{
-		printf("%s\n", (char *)a->content);
-		a = a->next;
-	}
+	if (ft_lstsize(a) < 6)
+		short_sort(&a, &b);
+	else
+		sort(&a, &b);
+	free_list(&a);
 }
 
 int	main(int argc, char const *argv[])
 {
-	int	i;
+	char	**split;
 
-	i = 1;
-	while (argc > 1 && argv[i])
-	{
-		if (!check_in(argv[i]))
-			return (-1);
-		else
-			i++;
-	}
-	if (!check_dup(argv + 1))
+	split = NULL;
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (-1);
-	i = 1;
-	while (argv[i])
+	else if (argv++ && argc == 2)
 	{
-		push_swap((argv[i]));
-		i++;
+		split = ft_split(argv[0], ' ');
+		argv = (char const **)split;
 	}
-	return (0);
+	return (handle_input(argv, split));
 }
