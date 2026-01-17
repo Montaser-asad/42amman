@@ -1,6 +1,6 @@
-# This project has been created as part
-# of the 42 curriculum by <masad>
+# This project has been created as part of the 42 curriculum by <masad>
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # push_swap
 
