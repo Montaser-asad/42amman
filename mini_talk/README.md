@@ -73,8 +73,6 @@ make re     # Recompiles everything
 
 AI assistance (GitHub Copilot) was used in this project for:
 
-- **Debugging**: Identifying and fixing issues with signal handling and bit manipulation logic
 - **Code explanation**: Understanding the behavior of `sigaction`, `_POSIX_C_SOURCE`, and static variables
-- **Optimization**: Improving signal transmission reliability with appropriate `usleep` timing
 
 All code was reviewed and understood before implementation. The core logic and architecture were developed independently.
