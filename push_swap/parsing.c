@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 21:03:57 by masad             #+#    #+#             */
-/*   Updated: 2026/01/15 17:02:14 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:44:55 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int	check_sort(const char **n)
 	return (0);
 }
 
-int	check_in(const char *n)
+int	check_int(const char *n)
 {
 	if (*n == '-' || *n == '+')
 		n++;
+	if (!*n)
+		return (0);
 	while (*n)
 	{
 		if (*n >= '0' && *n <= '9')
@@ -78,7 +80,7 @@ int	parse(const char **input)
 	i = 0;
 	while (input[i])
 	{
-		if (!check_in(input[i]) || !check_max(input[i]))
+		if (!check_int(input[i]) || !check_max(input[i]))
 			return (1);
 		else
 			i++;

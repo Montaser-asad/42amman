@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:25:24 by masad             #+#    #+#             */
-/*   Updated: 2026/01/17 16:11:25 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:55:39 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	sort_i(t_list **node)
 	i = -1;
 	sizeofls = ft_lstsize(*node);
 	array = malloc(sizeof(int) * sizeofls);
+	if (!array)
+		return ;
 	while (++i < sizeofls)
 	{
 		array[i] = (*node)->content;
@@ -88,6 +90,8 @@ void	push_swap(char const *input[])
 	while (input[i])
 	{
 		t = ft_lstnew(ft_atol(input[i]));
+		if (!t && free_list(&a))
+			return ;
 		ft_lstadd_back(&a, t);
 		i++;
 	}
@@ -107,9 +111,10 @@ int	main(int argc, char const *argv[])
 		return (-1);
 	else if (argv++ && argc == 2)
 	{
-		split = ft_split(argv[0], ' ');
+		split = ft_split(*argv, ' ');
+		if (!split)
+			return (-1);
 		argv = (char const **)split;
 	}
-
 	return (handle_input(argv, split));
 }

@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:34:22 by masad             #+#    #+#             */
-/*   Updated: 2026/01/15 20:33:44 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:13:52 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 void	push_swap(char const *input[]);
 int		check_max(const char *n);
 int		check_dup(const char **n);
-int		check_in(const char *n);
+int		check_int(const char *n);
 void	short_sort(t_list **a, t_list **b);
 int		parse(const char **input);
 void	sort(t_list **a, t_list **b);
 void	sort_i(t_list **node);
 void	radix(t_list **a, t_list **b);
-void	free_list(t_list **lst);
-void	free_split(char **split);
+int		free_list(t_list **lst);
+int		free_split(char **split);
 int		handle_input(char const **argv, char **split);
 
 /* short_sort_utils */

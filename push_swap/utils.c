@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 17:40:00 by masad             #+#    #+#             */
-/*   Updated: 2026/01/15 20:31:07 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:17:12 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,18 @@ void	put_min_top(t_list **a)
 		rra(a);
 }
 
-void	free_list(t_list **lst)
+int	free_list(t_list **lst)
 {
 	t_list	*tmp;
 
+	if (!*lst)
+		return (1);
 	while (*lst)
 	{
 		tmp = (*lst)->next;
 		free(*lst);
 		*lst = tmp;
 	}
+	*lst = NULL;
+	return (1);
 }

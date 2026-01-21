@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 12:03:34 by masad             #+#    #+#             */
-/*   Updated: 2025/09/04 18:58:52 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 15:51:55 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,19 @@ static int	free_all(char **ptr, int l)
 	while (l--)
 		free(ptr[l]);
 	free(ptr);
+	ptr = NULL;
 	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**sqr;
-	int		cnt;
+	int		sqr_len;
 	int		i;
 
 	i = 0;
-	cnt = count(s, c);
-	sqr = (malloc(sizeof(char *) * (cnt + 1)));
+	sqr_len = count(s, c);
+	sqr = malloc(sizeof(char *) * (sqr_len + 1));
 	if (!sqr)
 		return (NULL);
 	while (*s)
@@ -69,13 +70,13 @@ char	**ft_split(char const *s, char c)
 		if (*s && *s != c)
 		{
 			sqr[i] = ft_substr(s, 0, len(s, c));
-			if (sqr[i++] == NULL)
-				if (free_all(sqr, i))
-					return (NULL);
+			if (!sqr[i] && free_all(sqr, i))
+				return (NULL);
+			i++;
 		}
 		while (*s && *s != c)
 			s++;
 	}
 	sqr[i] = NULL;
-	return ((sqr));
+	return (sqr);
 }

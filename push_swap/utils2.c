@@ -6,13 +6,13 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 20:29:58 by masad             #+#    #+#             */
-/*   Updated: 2026/01/15 20:31:03 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/20 16:43:43 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_split(char **split)
+int	free_split(char **split)
 {
 	int	i;
 
@@ -20,13 +20,17 @@ void	free_split(char **split)
 	while (split[i])
 		free(split[i++]);
 	free(split);
+	return (1);
 }
 
 int	handle_input(char const **argv, char **split)
 {
-	if (!parse(argv) || parse(argv) == 2)
+	int	rv;
+
+	rv = parse(argv);
+	if (!rv || rv == 2)
 	{
-		if (parse(argv) == 2)
+		if (rv == 2)
 		{
 			if (split)
 				free_split(split);
