@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 16:44:23 by masad             #+#    #+#             */
-/*   Updated: 2025/09/22 15:35:57 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/23 04:05:52 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 void	ft_puthex(unsigned int nb, char hex, int *cnt)
 {
 	char	x;
-	int		sign;
 
 	(*cnt)++;
-	sign = 1;
-	if (nb < 0)
-	{
-		nb = -nb;
-		write(1, "-", 1);
-	}
 	if (nb >= 16)
 		ft_puthex(nb / 16, hex, cnt);
 	x = (nb % 16);

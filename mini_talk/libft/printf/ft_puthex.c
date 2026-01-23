@@ -15,15 +15,9 @@
 void	ft_puthex(unsigned int nb, char hex, int *cnt)
 {
 	char	x;
-	int		sign;
 
 	(*cnt)++;
-	sign = 1;
-	if (nb < 0)
-	{
-		nb = -nb;
-		write(1, "-", 1);
-	}
+	
 	if (nb >= 16)
 		ft_puthex(nb / 16, hex, cnt);
 	x = (nb % 16);
