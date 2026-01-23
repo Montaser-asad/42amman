@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:42:36 by masad             #+#    #+#             */
-/*   Updated: 2026/01/24 02:44:19 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/24 02:44:35 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_message(void)
 	}
 }
 
-void	cnct(char charecter)
+void	concat(char charecter)
 {
 	char	tmp[2];
 	char	*joined;
@@ -42,26 +42,27 @@ void	cnct(char charecter)
 void	sighandler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	charecter;
-	static int				index;
+	static int				idex;
 	int						pid;
 
-	pid = info->si_pid;
 	(void)context;
 	charecter <<= 1;
+	pid = info->si_pid;
 	if (sig == SIGUSR1)
 		charecter |= 1;
-	index++;
-	if (index == 8)
+	idex++;
+	if (idex == 8)
 	{
 		if (charecter == '\0')
 		{
-			cnct('\n');
+			concat('\n');
 			ft_printf("%s", g_message);
 			free_message();
+			kill(pid, SIGUSR2);
 		}
 		else
-			cnct(charecter);
-		index = 0;
+			concat(charecter);
+		idex = 0;
 		charecter = 0;
 	}
 	kill(pid, SIGUSR1);

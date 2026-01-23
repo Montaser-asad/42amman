@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 18:26:33 by masad             #+#    #+#             */
-/*   Updated: 2026/01/24 02:38:50 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/24 02:48:46 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	ack(int sig)
 	if (sig == SIGUSR1)
 		g_ack_received = 1;
 	else if (sig == SIGUSR2)
+	{
 		g_ack_received = 2;
+		ft_printf("Message received by server\n");
+	}
 }
 
 void	send_sig(int pid, const char c)
