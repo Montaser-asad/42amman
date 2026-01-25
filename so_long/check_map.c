@@ -6,7 +6,7 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 21:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/25 22:46:27 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:33:42 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,12 @@ int	check_map(char *filename)
 		return (1);
 	if (check_charecters(map))
 		return (1);
+	while (*map)
+	{
+		ft_printf("%s\n", *map);
+		free(*map++);
+	}
+	map = NULL;
+	close(fd);
 	return (0);
 }

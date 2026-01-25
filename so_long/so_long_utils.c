@@ -6,7 +6,7 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:46:31 by montser           #+#    #+#             */
-/*   Updated: 2026/01/25 22:46:11 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 00:29:17 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 char	**read_map(int fd)
 {
-	char	*temp;
+	char	*line;
 	char	*map;
+	char	*temp;
 
-	temp = get_next_line(fd);
+	line = get_next_line(fd);
 	map = ft_strdup("");
-	if (!temp)
+	if (!line || !map)
 		return (NULL);
-	while (map)
+	while (line)
 	{
-		map = ft_strjoin(map, temp);
+		temp = map;
+		map = ft_strjoin(map, line);
+		free(temp);
+		free(line);
 		if (!map)
 			return (NULL);
-		temp = get_next_line(fd);
+		line = get_next_line(fd);
 	}
+	free(line);
 	return (ft_split(map, '\n'));
 }
