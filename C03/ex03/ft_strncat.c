@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
-{	
+{
 	unsigned int	i;
 	unsigned int	j;
 

@@ -24,7 +24,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
-char	*handel_stach(char *stach, int br);
+char	*handel_stach(int fd, char *stach);
 char	*free_and_null(char **ptr);
 
 #endif

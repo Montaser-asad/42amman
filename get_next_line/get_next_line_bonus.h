@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 10:42:48 by masad             #+#    #+#             */
-/*   Updated: 2025/11/19 19:38:41 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/25 22:36:32 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
-char	*handel_stach(char *stach, int br);
+char	*handel_stach(int fd, char *stach);
 char	*free_and_null(char **ptr);
 
 #endif

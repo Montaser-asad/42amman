@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
+#include <stdlib.h>
+
 //#include<stdio.h>
 int	ft_ultimate_range(int **range, int min, int max)
 {
@@ -22,7 +23,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 		range[0] = NULL;
 		return (0);
 	}
-	range[0] = (int *) malloc(sizeof(int) * (max - min));
+	range[0] = (int *)malloc(sizeof(int) * (max - min));
 	if (range[0] == NULL)
 		return (-1);
 	while (min < max)

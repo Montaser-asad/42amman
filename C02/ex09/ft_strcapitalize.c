@@ -15,16 +15,15 @@ char	*ft_strcapitalize(char *str)
 	int	i;
 
 	i = -1;
-	while (str [i++] != '\0')
+	while (str[i++] != '\0')
 		if (str[i] >= 'A' && str[i] <= 'Z')
 			str[i] += 32;
-	i = 0
-	if (str[i] >= 'a' && str[i] <= 'z')
-		{
-			str[i] -= 32;
-			i++;
-		}
-	while (str [i] != '\0')
+	i = 0 if (str[i] >= 'a' && str[i] <= 'z')
+	{
+		str[i] -= 32;
+		i++;
+	}
+	while (str[i] != '\0')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			i++;

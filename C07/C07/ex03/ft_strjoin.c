@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
+#include <stdlib.h>
+
 //#include<stdio.h>
 int	ft_strlen(char *str)
 {
@@ -57,7 +58,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 		x += ft_strlen(strs[i]);
 		i++;
 	}
-	str = (char *) malloc (x + ft_strlen (sep) * (size - 1));
+	str = (char *)malloc(x + ft_strlen(sep) * (size - 1));
 	i = 0;
 	if (strs == NULL)
 		return (0);
@@ -76,7 +77,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	int		size;
 	char	*sep;
 	char	*strs[] = {"sadf","asdf","asdf","sadf"};
-	
+
 	size = 4;
 	sep = ", ";
 	printf("%s",ft_strjoin(size, strs , sep));

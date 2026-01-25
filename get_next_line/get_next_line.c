@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 20:55:35 by masad             #+#    #+#             */
-/*   Updated: 2025/11/19 19:07:47 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/24 19:15:45 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*update_stach(char *stach)
 	return (df);
 }
 
-char	*read_and_stach(int fd, char *stach)
+char	*handel_stach(int fd, char *stach)
 {
 	char	*buffer;
 	int		br;
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stach = read_and_stach(fd, stach);
+	stach = handel_stach(fd, stach);
 	if (!stach || !*stach)
 		return (free_and_null(&stach));
 	line = extract_line(stach);

@@ -36,8 +36,8 @@ int	ft_atoi(char *str)
 	return (result * sign);
 }
 
-/*int	main()
+/*int	main(void)
 {
-	printf ("%d", ft_atoi(" 	 	--98789778asefa887"));
+	printf ("%d", ft_atoi(" 			--98789778asefa887"));
 	return (0);
 }*/

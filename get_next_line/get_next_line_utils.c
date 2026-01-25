@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 21:03:59 by masad             #+#    #+#             */
-/*   Updated: 2025/11/17 21:04:26 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/24 19:15:26 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

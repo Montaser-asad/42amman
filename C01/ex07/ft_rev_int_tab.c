@@ -23,9 +23,9 @@ void	ft_rev_int_tab(int *tab, int size)
 	while (s < m)
 	{
 		t = tab[s];
-		tab [s] = tab[e];
-		tab [e] = t;
+		tab[s] = tab[e];
+		tab[e] = t;
 		s++;
 		e--;
-	}	
+	}
 }

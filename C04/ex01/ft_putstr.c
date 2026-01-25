@@ -9,13 +9,13 @@
 /*   Updated: 2025/02/23 14:31:32 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include<unistd.h>
+#include <unistd.h>
 
 void	ft_putstr(char *str)
 {
 	while (*str)
 	{
-		write (1, str, 1);
+		write(1, str, 1);
 		str++;
 	}
 }

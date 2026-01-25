@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdlib.h>
+#include <stdlib.h>
+
 //#include<stdio.h>
 char	*ft_strdup(char *src)
 {
@@ -25,7 +26,7 @@ char	*ft_strdup(char *src)
 		while (len)
 			len++;
 	}
-	ptr = char *malloc(len);
+	ptr = char * malloc(len);
 	while (src[i])
 	{
 		ptr[i] = src[i];

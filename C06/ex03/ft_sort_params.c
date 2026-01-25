@@ -9,8 +9,8 @@
 /*   Updated: 2025/02/25 20:33:17 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include<stdio.h>
-#include<unistd.h>
+#include <stdio.h>
+#include <unistd.h>
 
 int	ft_strcmp(char *s1, char *s2)
 {

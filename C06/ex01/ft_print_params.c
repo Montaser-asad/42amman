@@ -9,7 +9,7 @@
 /*   Updated: 2025/02/25 18:45:32 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include<unistd.h>
+#include <unistd.h>
 
 void	prntarg(char *c)
 {
@@ -17,11 +17,11 @@ void	prntarg(char *c)
 
 	i = 0;
 	while (c[i])
-	{	
-		write (1, &c[i], 1);
+	{
+		write(1, &c[i], 1);
 		i++;
 	}
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 }
 
 int	main(int argc, char *argv[])

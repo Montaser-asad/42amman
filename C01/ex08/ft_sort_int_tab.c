@@ -22,9 +22,9 @@ void	ft_sort_int_tab(int *tab, int size)
 	while (c < s)
 	{
 		while (p < s)
-		{	
+		{
 			if (tab[p] > tab[c])
-			{	
+			{
 				tab[p] = tab[p] + tab[c];
 				tab[c] = tab[p] - tab[c];
 				tab[p] = tab[p] - tab[c];
