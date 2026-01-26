@@ -6,7 +6,7 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 21:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:32:46 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 23:15:16 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_path(t_game *game)
 	int		holder;
 	char	**map_copy;
 
-	map_copy = copy_map(game->map, game->map_rows);
+	map_copy = copy_map(game->map, game->map_rows, game);
 	holder = game->collectibles;
 	flood_fill(map_copy, game->player_x, game->player_y, game);
 	free_map(map_copy);
@@ -93,9 +93,9 @@ int	check_characters(t_game *game)
 				return (1);
 			count_char(c, &player_count, game);
 			if (c == 'P')
-				set_position(game, j, i, c);
+				set_positions(game, j, i, c);
 			if (c == 'E')
-				set_position(game, j, i, c);
+				set_positions(game, j, i, c);
 		}
 	}
 	if (player_count != 1 || game->exit_found != 1 || game->collectibles < 1)

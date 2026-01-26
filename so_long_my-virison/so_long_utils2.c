@@ -6,7 +6,7 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 01:50:03 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:33:00 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 23:13:21 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	move(t_game *game, int px, int py)
 {
 	if (game->map[py][px] == '1')
 		return ;
+	if (game->map[py][px] == 'E' && game->collectibles > 0)
+		return ;
 	if (game->map[py][px] == 'C')
 		game->collectibles--;
 	if (game->map[py][px] == 'E' && game->collectibles == 0)
@@ -60,11 +62,7 @@ void	move(t_game *game, int px, int py)
 			+ 1);
 		close_game(game);
 	}
-	if (game->player_x == game->exit_x && game->player_y == game->exit_y
-		&& game->collectibles > 0)
-		game->map[game->player_y][game->player_x] = 'E';
-	else
-		game->map[game->player_y][game->player_x] = '0';
+	game->map[game->player_y][game->player_x] = '0';
 	game->player_x = px;
 	game->player_y = py;
 	game->map[game->player_y][game->player_x] = 'P';

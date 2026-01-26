@@ -6,7 +6,7 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:31:21 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 23:15:48 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void		render_map(t_game *game);
 int			handle_keypress(int keycode, t_game *game);
 int			close_game(t_game *game);
 void		move(t_game *game, int px, int py);
-char		**copy_map(char **original_map, int rows);
+char		**copy_map(char **original_map, int rows, t_game *game);
 void		flood_fill(char **map, int x, int y, t_game *game);
 void		count_char(char c, int *player, t_game *game);
-void		set_position(t_game *game, int x, int y, char tile);
+void		set_positions(t_game *game, int x, int y, char c);
 #endif

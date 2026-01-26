@@ -6,13 +6,13 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:33:56 by masad             #+#    #+#             */
-/*   Updated: 2026/01/26 23:33:18 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 23:16:11 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**copy_map(char **original_map, int rows)
+char	**copy_map(char **original_map, int rows, t_game *game)
 {
 	char	**new_map;
 	int		i;
@@ -32,6 +32,7 @@ char	**copy_map(char **original_map, int rows)
 		i++;
 	}
 	new_map[rows] = NULL;
+	new_map[game->exit_y][game->exit_x] = '1';
 	return (new_map);
 }
 
@@ -66,16 +67,17 @@ int	close_game(t_game *game)
 	exit(0);
 }
 
-void	set_position(t_game *game, int x, int y, char tile)
+void	set_positions(t_game *game, int x, int y, char c)
 {
-	if (tile == 'P')
+	if (c == 'P')
 	{
 		game->player_x = x;
 		game->player_y = y;
 	}
-	else if (tile == 'E')
+	else if (c == 'E')
 	{
 		game->exit_x = x;
 		game->exit_y = y;
+		game->exit_found = 1;
 	}
 }
