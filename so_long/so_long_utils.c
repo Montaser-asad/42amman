@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:46:31 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 02:09:43 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 18:50:01 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	exit_with_error(int error_code)
 {
-	char	*message[4];
+	char	*message[5];
 
 	message[0] = "Malloc failed";
 	message[1] = "Invalid file extension";
 	message[2] = "Could not open file";
 	message[3] = "Invalid map";
+	message[4] = "Failed to load images";
 	ft_printf("Error\n%s\n", message[error_code]);
 	exit(1);
 }
@@ -63,31 +64,13 @@ int	open_file(char *filename)
 	return (fd);
 }
 
-char	**read_map(int fd)
+void	count_char(char c, int *player, t_game *game)
 {
-	char	*linear_map;
-	char	*line;
-	char	**map;
-	char	*temp;
-
-	line = ft_strdup("");
-	linear_map = ft_strdup("");
-	if (!line || !linear_map)
-		return (NULL);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		if (line && ft_strncmp(line, "\n", 1) == 0)
-			exit_with_error(2);
-		temp = linear_map;
-		linear_map = ft_strjoin(linear_map, line);
-		free(temp);
-		if (!linear_map)
-			return (NULL);
-	}
-	free(line);
-	map = ft_split(linear_map, '\n');
-	free(linear_map);
-	return (map);
+	if (c == 'P')
+		(*player)++;
+	else if (c == 'E')
+		game->exit_found++;
+	else if (c == 'C')
+		game->collectibles++;
 }
+

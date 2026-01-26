@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 03:24:59 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 19:11:58 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define TILE_SIZE 64
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_ESC 65307
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define QUIT_BUTTON 113
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
@@ -31,8 +41,8 @@ typedef struct s_game
 	int		player_x;
 	int		player_y;
 	int		collectibles;
-	int		moves;
 	int		exit_found;
+	int		moves;
 	void	*img_wall;
 	void	*img_floor;
 	void	*img_player;
@@ -40,14 +50,23 @@ typedef struct s_game
 	void	*img_collectible;
 }			t_game;
 
+int			parse(char *input[]);
 void		init_game_variables(t_game *game);
 int			check_ber_extension(char *filename);
 void		exit_with_error(int error_code);
 void		free_map(char **map);
-int			parse(char *input[]);
 char		**read_map(int fd);
 int			check_map(t_game *game);
 int			open_file(char *filename);
 void		start_game(t_game *game);
 void		start_game(t_game *game);
+void		*select_tile_image(t_game *game, char tile);
+void		load_images(t_game *game);
+void		render_map(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+int			close_game(t_game *game);
+void		move(t_game *game, int px, int py);
+char		**copy_map(char **original_map, int rows);
+void		flood_fill(char **map, int x, int y, t_game *game);
+void		count_char(char c, int *player, t_game *game);
 #endif

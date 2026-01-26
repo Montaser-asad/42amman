@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 21:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 03:27:22 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 19:34:56 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,23 @@ int	check_borders(t_game *game)
 	}
 	return (0);
 }
-
-static void	count_char(char c, int *player, t_game *game)
+int	check_path(t_game *game)
 {
-	if (c == 'P')
-		(*player)++;
-	else if (c == 'E')
-		game->exit_found++;
-	else if (c == 'C')
-		game->collectibles++;
+	int		holder;
+	char	**map_copy;
+
+	map_copy = copy_map(game->map, game->map_rows);
+	game->exit_found = 0;
+	holder = game->collectibles;
+	flood_fill(map_copy, game->player_x, game->player_y, game);
+	free_map(map_copy);
+	if (game->collectibles != 0 || game->exit_found != 1)
+		return (1);
+	game->collectibles = holder;
+	return (0);
 }
 
-int	check_charecters(t_game *game)
+int	check_characters(t_game *game)
 {
 	int		player_count;
 	char	c;
@@ -104,7 +109,9 @@ int	check_map(t_game *game)
 		return (1);
 	if (check_borders(game))
 		return (1);
-	if (check_charecters(game))
+	if (check_characters(game))
+		return (1);
+	if (check_path(game))
 		return (1);
 	return (0);
 }
