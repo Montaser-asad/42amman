@@ -6,34 +6,38 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 21:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 00:33:42 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 03:27:22 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_rectangular(char **map)
+int	check_rectangular(t_game *game)
 {
 	int		i;
-	size_t	row_length;
+	size_t	row;
 
-	row_length = ft_strlen(map[0]);
+	row = ft_strlen(game->map[0]);
 	i = 1;
-	while (map[i])
+	while (game->map[i])
 	{
-		if (ft_strlen(map[i]) != row_length)
-			return (0);
+		if (ft_strlen(game->map[i]) != row)
+			return (1);
 		i++;
 	}
-	return (1);
+	game->map_rows = i;
+	game->map_cols = (int)row;
+	return (0);
 }
 
-int	check_borders(char **map)
+int	check_borders(t_game *game)
 {
-	int	i;
-	int	rows;
-	int	cols;
+	char	**map;
+	int		i;
+	int		rows;
+	int		cols;
 
+	map = game->map;
 	rows = 0;
 	while (map[rows])
 		rows++;
@@ -42,80 +46,65 @@ int	check_borders(char **map)
 	while (i < cols)
 	{
 		if (map[0][i] != '1' || map[rows - 1][i] != '1')
-			return (0);
+			return (1);
 		i++;
 	}
 	i = 0;
 	while (i < rows)
 	{
 		if (map[i][0] != '1' || map[i][cols - 1] != '1')
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-static void	count_char(char c, int *player, int *exit, int *collect)
+static void	count_char(char c, int *player, t_game *game)
 {
 	if (c == 'P')
 		(*player)++;
 	else if (c == 'E')
-		(*exit)++;
+		game->exit_found++;
 	else if (c == 'C')
-		(*collect)++;
+		game->collectibles++;
 }
 
-int	check_charecters(char **map)
+int	check_charecters(t_game *game)
 {
-	int		counts[3];
+	int		player_count;
 	char	c;
 	int		i;
 	int		j;
 
-	counts[0] = 0;
-	counts[1] = 0;
-	counts[2] = 0;
+	player_count = 0;
 	i = -1;
-	while (map[++i])
+	while (game->map[++i])
 	{
 		j = -1;
-		while (map[i][++j])
+		while (game->map[i][++j])
 		{
-			c = map[i][j];
+			c = game->map[i][j];
 			if (c != 'P' && c != 'E' && c != 'C' && c != '0' && c != '1')
 				return (1);
-			count_char(c, &counts[0], &counts[1], &counts[2]);
+			count_char(c, &player_count, game);
+			if (c == 'P')
+				game->player_x = j;
+			if (c == 'P')
+				game->player_y = i;
 		}
 	}
-	if (counts[0] != 1 || counts[1] < 1 || counts[2] < 1)
+	if (player_count != 1 || game->exit_found != 1 || game->collectibles < 1)
 		return (1);
 	return (0);
 }
 
-int	check_map(char *filename)
+int	check_map(t_game *game)
 {
-	char	**map;
-	int		fd;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error opening file");
+	if (check_rectangular(game))
 		return (1);
-	}
-	map = read_map(fd);
-	if (!check_rectangular(map))
+	if (check_borders(game))
 		return (1);
-	if (!check_borders(map))
+	if (check_charecters(game))
 		return (1);
-	if (check_charecters(map))
-		return (1);
-	while (*map)
-	{
-		ft_printf("%s\n", *map);
-		free(*map++);
-	}
-	map = NULL;
-	close(fd);
 	return (0);
 }

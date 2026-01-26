@@ -12,7 +12,7 @@ MLX = $(MLX_DIR)/libmlx.a
 
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-SRCS = so_long.c so_long_utils.c parse.c check_map.c
+SRCS = so_long.c so_long_utils.c so_long_utils2.c start_game.c parse.c check_map.c
 
 OBJS = $(SRCS:.c=.o)
 

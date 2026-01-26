@@ -6,35 +6,27 @@
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:37:07 by montser           #+#    #+#             */
-/*   Updated: 2026/01/25 18:06:16 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/26 03:25:43 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_ber_extension(char *filename)
-{
-	int	len;
-
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	if (ft_strncmp(&filename[len - 4], ".ber", 4) != 0)
-		return (0);
-	return (1);
-}
-
 int	parse(char *input[])
 {
-	if (check_ber_extension(input[1]) == 0)
+	int		fd;
+	t_game	game;
+
+	fd = open_file(input[1]);
+	game.map = read_map(fd);
+	init_game_variables(&game);
+	if (!game.map)
+		exit_with_error(0);
+	if (check_map(&game) != 0)
 	{
-		ft_printf("Error\nInvalid file extension\n");
-		return (1);
+		free_map(game.map);
+		exit_with_error(2);
 	}
-	if (check_map(input[1]) != 0)
-	{
-		ft_printf("Error\nInvalid map\n");
-		return (1);
-	}
+	start_game(&game);
 	return (0);
 }

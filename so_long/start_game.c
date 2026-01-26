@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/24 20:28:18 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 03:25:38 by montser          ###   ########.fr       */
+/*   Created: 2026/01/26 02:19:47 by montser           #+#    #+#             */
+/*   Updated: 2026/01/26 03:23:38 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void	start_game(t_game *game)
 {
-	if (argc != 2)
-	{
-		ft_printf("Error\nInvalid number of arguments\n");
-		exit(1);
-	}
-	if (parse(argv) == 1)
-		exit(1);
-	return (0);
+    game->mlx = mlx_init();
+    if (!game->mlx)
+        exit_with_error(0);
+    game->win = mlx_new_window(game->mlx, game->map_cols * TILE_SIZE,
+            game->map_rows * TILE_SIZE, "so_long");
+    if (!game->win)
+    {
+        free_map(game->map);
+        exit_with_error(0);
+    }
+    
+    mlx_loop(game->mlx);
 }

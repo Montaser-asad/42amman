@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 00:54:50 by masad             #+#    #+#             */
-/*   Updated: 2025/08/14 01:12:49 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/26 01:23:45 by montser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
+	if (n == 0)
+		return (0);
 	i = 0;
 	if (n == 0)
 		return (0);
