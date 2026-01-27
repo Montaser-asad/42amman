@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:42:36 by masad             #+#    #+#             */
-/*   Updated: 2026/01/24 02:44:35 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 16:11:18 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,22 @@ void	concat(char charecter)
 	char	*joined;
 
 	if (g_message == NULL)
+	{
 		g_message = ft_strdup("");
+		if (!g_message)
+		{
+			ft_printf("Memory allocation failed\n");
+			exit(EXIT_FAILURE);
+		}
+	}
 	tmp[0] = charecter;
 	tmp[1] = '\0';
 	joined = ft_strjoin(g_message, tmp);
+	if (!joined)
+	{
+		ft_printf("Memory allocation failed\n");
+		exit(EXIT_FAILURE);
+	}
 	free(g_message);
 	g_message = joined;
 }
@@ -42,7 +54,7 @@ void	concat(char charecter)
 void	sighandler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	charecter;
-	static int				idex;
+	static int				index;
 	int						pid;
 
 	(void)context;
@@ -50,8 +62,8 @@ void	sighandler(int sig, siginfo_t *info, void *context)
 	pid = info->si_pid;
 	if (sig == SIGUSR1)
 		charecter |= 1;
-	idex++;
-	if (idex == 8)
+	index++;
+	if (index == 8)
 	{
 		if (charecter == '\0')
 		{
@@ -62,7 +74,7 @@ void	sighandler(int sig, siginfo_t *info, void *context)
 		}
 		else
 			concat(charecter);
-		idex = 0;
+		index = 0;
 		charecter = 0;
 	}
 	kill(pid, SIGUSR1);

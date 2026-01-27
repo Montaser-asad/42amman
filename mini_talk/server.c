@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 14:42:36 by masad             #+#    #+#             */
-/*   Updated: 2026/01/24 02:44:19 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 16:10:25 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,23 @@ void	cnct(char charecter)
 	char	*joined;
 
 	if (g_message == NULL)
+	{
 		g_message = ft_strdup("");
+		if (!g_message)
+		{
+			ft_printf("Memory allocation failed\n");
+			exit(EXIT_FAILURE);
+		}
+	}
 	tmp[0] = charecter;
 	tmp[1] = '\0';
-	joined = ft_strjoin(g_message, tmp);
+	joined = NULL; // ft_strjoin(g_message, tmp);
 	free(g_message);
+	if (!joined)
+	{
+		ft_printf("Memory allocation failed\n");
+		exit(EXIT_FAILURE);
+	}
 	g_message = joined;
 }
 

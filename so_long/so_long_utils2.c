@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 01:50:03 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:33:00 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 15:15:55 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	move(t_game *game, int px, int py)
 	if (game->map[py][px] == 'E' && game->collectibles == 0)
 	{
 		ft_printf("Checkmate! You've won the battle in %d moves.\n", game->moves
-			+ 1);
+				+ 1);
 		close_game(game);
 	}
 	if (game->player_x == game->exit_x && game->player_y == game->exit_y
@@ -84,18 +84,24 @@ char	*read_map_to_string(int fd, int *flag)
 	linear_map = ft_strdup("");
 	*flag = 0;
 	if (!line || !linear_map)
-		return (NULL);
-	while (line)
+		if (free_and_null(&linear_map) && free_and_null(&line))
+			exit_with_error(0);
+	while (linear_map && line)
 	{
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			if (free_and_null(&linear_map))
+				exit_with_error(0);
 		if (line && ft_strncmp(line, "\n", 1) == 0)
 			*flag = 1;
 		temp = linear_map;
 		linear_map = ft_strjoin(linear_map, line);
 		free(temp);
 		if (!linear_map)
-			return (NULL);
+			if (empty_get_next_line(fd))
+				if (free_and_null(&line))
+					exit_with_error(0);
 	}
 	free(line);
 	return (linear_map);
@@ -112,6 +118,8 @@ char	**read_map(int fd)
 		return (NULL);
 	map = ft_split(linear_map, '\n');
 	free(linear_map);
+	if (!map)
+		exit_with_error(0);
 	if (flag)
 	{
 		free_map(map);

@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 20:37:07 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 19:25:34 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/27 14:54:51 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	parse(char *input[])
 	init_game_variables(&game);
 	game.map = read_map(fd);
 	if (!game.map)
-		exit_with_error(0);
+		exit_with_error(3);
 	if (check_map(&game) != 0)
 	{
 		free_map(game.map);

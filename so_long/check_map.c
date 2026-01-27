@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 21:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:32:46 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 14:18:09 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	check_rectangular(t_game *game)
 
 	row = ft_strlen(game->map[0]);
 	i = 1;
+	if (!row)
+		return (1);
 	while (game->map[i])
 	{
 		if (ft_strlen(game->map[i]) != row)

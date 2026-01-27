@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:33:56 by masad             #+#    #+#             */
-/*   Updated: 2026/01/26 23:33:18 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 15:14:00 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**copy_map(char **original_map, int rows)
 
 	new_map = (char **)malloc((rows + 1) * sizeof(char *));
 	if (!new_map)
-		return (NULL);
+		exit_with_error(0);
 	i = 0;
 	while (i < rows)
 	{
@@ -27,7 +27,7 @@ char	**copy_map(char **original_map, int rows)
 		if (!new_map[i])
 		{
 			free_map(new_map);
-			return (NULL);
+			exit_with_error(0);
 		}
 		i++;
 	}
@@ -78,4 +78,19 @@ void	set_position(t_game *game, int x, int y, char tile)
 		game->exit_x = x;
 		game->exit_y = y;
 	}
+}
+int	empty_get_next_line(int fd)
+{
+	char *line;
+
+	line = get_next_line(fd);
+	if (!line)
+		exit_with_error(0);
+
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (1);
 }

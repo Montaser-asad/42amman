@@ -1,30 +1,23 @@
 CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = libftprintf.a
+CFILES = ft_putstr.c ft_putnbr.c ft_puthex.c ft_printf.c ft_putptr.c
+OFILES = $(CFILES:.c=.o)
 
-	CFLAGS = -Wall - Wextra -
-	Werror
+all: $(NAME)
 
-		NAME = libftprintf.a
+$(NAME): $(OFILES)
+	ar rcs $(NAME) $(OFILES)
 
-					CFILES = ft_putstr.c ft_putnbr.c ft_puthex.c ft_printf.c ft_putptr.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-								OFILES = $(CFILES
-											:.c =.o)
+clean:
+	rm -f $(OFILES)
 
-												all : $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-														$(NAME)
-	: $(OFILES) @ar rcs $(NAME) $(OFILES)
+re: fclean all
 
-		%.o : %.c @$(CC) $(CFLAGS) -
-		c $ <
-	-o $ @
-
-		clean : @rm -
-		f $(OFILES)
-
-			fclean : clean @rm -
-						f $(NAME)
-
-							re : fclean all
-
-									.PHONY : all clean fclean re
+.PHONY: all clean fclean re

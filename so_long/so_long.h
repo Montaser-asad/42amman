@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: montser <montser@student.42.fr>            +#+  +:+       +#+        */
+/*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/26 23:31:21 by montser          ###   ########.fr       */
+/*   Updated: 2026/01/27 15:08:03 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_game
 	void	*img_collectible;
 }			t_game;
 
+int			empty_get_next_line(int fd);
 int			parse(char *input[]);
 void		init_game_variables(t_game *game);
 int			check_ber_extension(char *filename);
