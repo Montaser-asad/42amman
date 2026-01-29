@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:33:56 by masad             #+#    #+#             */
-/*   Updated: 2026/01/29 18:29:21 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/29 21:16:05 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	flood_fill(char **map, int x, int y, t_game *game)
 		return ;
 	if (map[y][x] == 'C')
 		game->collectibles--;
+	if (map[y][x] == 'E')
+		game->exit_found = 1;
 	map[y][x] = 'F';
 	flood_fill(map, x + 1, y, game);
 	flood_fill(map, x - 1, y, game);
@@ -60,17 +62,20 @@ int	close_game(t_game *game)
 			mlx_destroy_image(game->mlx, game->img_floor);
 		if (game->img_player)
 			mlx_destroy_image(game->mlx, game->img_player);
+		if (game->img_playerR)
+			mlx_destroy_image(game->mlx, game->img_playerR);
+		if (game->img_playerL)
+			mlx_destroy_image(game->mlx, game->img_playerL);
 		if (game->img_exit)
 			mlx_destroy_image(game->mlx, game->img_exit);
+		if (game->img_exitC)
+			mlx_destroy_image(game->mlx, game->img_exitC);
 		if (game->img_collectible)
 			mlx_destroy_image(game->mlx, game->img_collectible);
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
-		if (game->mlx)
-		{
-			mlx_destroy_display(game->mlx);
-			free(game->mlx);
-		}
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 	}
 	exit(0);
 }

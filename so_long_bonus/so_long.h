@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 18:45:29 by montser           #+#    #+#             */
-/*   Updated: 2026/01/29 18:44:51 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/29 21:25:49 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ typedef struct s_game
 	void	*img_wall;
 	void	*img_floor;
 	void	*img_player;
+	void	*img_playerR;
+	void	*img_playerL;
 	void	*img_exit;
+	void	*img_exitC;
 	void	*img_collectible;
+	char	direction;
 }			t_game;
 
 int			parse(char *input[]);
@@ -72,4 +76,5 @@ char		**copy_map(char **original_map, int rows);
 void		flood_fill(char **map, int x, int y, t_game *game);
 void		count_char(char c, int *player, t_game *game);
 void		set_position(t_game *game, int x, int y, char tile);
+void		print_moves_to_window(t_game *game);
 #endif

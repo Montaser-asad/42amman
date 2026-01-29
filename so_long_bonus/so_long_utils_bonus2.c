@@ -6,7 +6,7 @@
 /*   By: masad <masad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 01:50:03 by montser           #+#    #+#             */
-/*   Updated: 2026/01/29 18:16:13 by masad            ###   ########.fr       */
+/*   Updated: 2026/01/29 21:11:15 by masad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	init_game_variables(t_game *game)
 	game->moves = 0;
 	game->img_wall = NULL;
 	game->img_floor = NULL;
-	game->img_player = NULL;
+	game->img_playerR = NULL;
+	game->img_playerL = NULL;
 	game->img_exit = NULL;
+	game->img_exitC = NULL;
 	game->img_collectible = NULL;
+	game->direction = 'R';
 }
 
 void	*select_tile_image(t_game *game, char tile)
@@ -40,9 +43,21 @@ void	*select_tile_image(t_game *game, char tile)
 	else if (tile == '0')
 		return (game->img_floor);
 	else if (tile == 'P')
-		return (game->img_player);
-	else if (tile == 'E')
+	{
+		if (game->collectibles != 0)
+			return (game->img_player);
+		else
+		{
+			if (game->direction == 'R')
+				return (game->img_playerR);
+			else
+				return (game->img_playerL);
+		}
+	}
+	else if (tile == 'E' && game->collectibles != 0)
 		return (game->img_exit);
+	else if (tile == 'E' && game->collectibles == 0)
+		return (game->img_exitC);
 	else if (tile == 'C')
 		return (game->img_collectible);
 	return (NULL);
@@ -71,6 +86,7 @@ void	move(t_game *game, int px, int py)
 	ft_printf("Moves: %d\n", game->moves);
 	mlx_clear_window(game->mlx, game->win);
 	render_map(game);
+	print_moves_to_window(game);
 }
 
 char	*read_map_to_string(int fd, int *flag)
